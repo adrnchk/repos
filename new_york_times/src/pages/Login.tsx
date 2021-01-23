@@ -68,7 +68,7 @@ function Login(props: ILoginProps) {
                 Sign in
               </button>
               <div className="text-center p-t-115">
-                <span className="txt1">Don’t have an account?</span>
+                <span className="txt1">Don’t have an account?{`   `}</span>
                 <span
                   className="txt2"
                   onClick={() => props.sethasAccount(!props.hasAccount)}
@@ -83,7 +83,7 @@ function Login(props: ILoginProps) {
                 Sign up
               </button>
               <div className="text-center p-t-115">
-                <span className="txt1">Have an account?</span>
+                <span className="txt1">Have an account?{`   `}</span>
                 <span
                   className="txt2"
                   onClick={() => props.sethasAccount(!props.hasAccount)}

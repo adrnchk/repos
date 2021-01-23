@@ -4,11 +4,8 @@ import "./scss/app.scss";
 import axios from "axios";
 import fire from "./fire";
 import { Route, Switch } from "react-router-dom";
-import Header from "./components/Header";
-import Login from "./pages/Login";
-import Home from "./pages/Home";
-import User from "./pages/User";
-import Page from "./pages/Page";
+import { Header } from "./components";
+import { Login, Home, Page, User } from "./pages";
 import { useDispatch } from "react-redux";
 import { changeName, changeEmail, changeAvatar } from "./redux/actions/userInf";
 import { setArticles } from "./redux/actions/articles";
@@ -83,12 +80,10 @@ function App() {
         dispatch(changeName(firebase.auth().currentUser?.displayName));
         dispatch(changeAvatar(firebase.auth().currentUser?.photoURL));
         console.log(firebase.auth().currentUser?.photoURL);
-        
       } else setUser(null);
     });
   };
 
-  
   React.useEffect(() => {
     authListener();
 
@@ -99,14 +94,14 @@ function App() {
       .then(({ data }) => {
         dispatch(
           setArticles([
-            data.results.map((element: any, index:number) => ({
+            data.results.map((element: any, index: number) => ({
               img: element.multimedia[0]?.url ? element.multimedia[0]?.url : "",
               title: element.title,
               url: element.url,
               published_date: element.published_date,
               updated: element.updated,
               abstract: element.abstract,
-              id: index
+              id: index,
             })),
           ])
         );
