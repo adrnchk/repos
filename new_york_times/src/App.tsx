@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./scss/app.scss";
 
 import axios from "axios";
@@ -83,11 +82,13 @@ function App() {
         dispatch(changeEmail(firebase.auth().currentUser?.email));
         dispatch(changeName(firebase.auth().currentUser?.displayName));
         dispatch(changeAvatar(firebase.auth().currentUser?.photoURL));
+        console.log(firebase.auth().currentUser?.photoURL);
+        
       } else setUser(null);
     });
   };
 
-  const [products, setproducts] = React.useState([]);
+  
   React.useEffect(() => {
     authListener();
 
@@ -98,13 +99,14 @@ function App() {
       .then(({ data }) => {
         dispatch(
           setArticles([
-            data.results.map((element: any) => ({
+            data.results.map((element: any, index:number) => ({
               img: element.multimedia[0]?.url ? element.multimedia[0]?.url : "",
               title: element.title,
               url: element.url,
               published_date: element.published_date,
               updated: element.updated,
               abstract: element.abstract,
+              id: index
             })),
           ])
         );

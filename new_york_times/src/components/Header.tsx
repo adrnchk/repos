@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../resourses/img/new-york-times.svg";
 import userPhoto from "../resourses/img/user.svg";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import firebase from "firebase";
 import { useSelector } from "react-redux";
 
@@ -27,9 +27,7 @@ function Header(props: IHeaderProps) {
     props.logout();
     setvisible(!visible);
   };
-  const toProfile = () => {
-    setvisible(!visible);
-  };
+
   const stor = useSelector(({ userInfo }: IUser) => {
     return {
       userInfo: userInfo,

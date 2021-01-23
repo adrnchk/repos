@@ -2,7 +2,8 @@ const initialState = {
     items:[],
 
 };
-const articles=(state = initialState, action)=>{
+
+const articles=(state = initialState, action:any)=>{
     if(action.type==="SET_ARTICLES"){
         return{
             ...state,

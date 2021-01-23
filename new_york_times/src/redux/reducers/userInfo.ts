@@ -2,22 +2,13 @@ const initialState = {
     name: "",
     email: "",
     avatar: "../resourses/img/user.svg"
-
 };
-// interface IInfo
-// {
-//     name: string | null;
-//     email: string | null;
-//     avatar: string | null;
-// }
-// interface IAction
-// {
-    
-//         type: string,
-//         payload: string,
-    
-// }
-const userInfo=(state = initialState, action)=>{
+interface IAction
+{
+    type: string,
+    payload: string,    
+}
+const userInfo=(state = initialState, action:IAction)=>{
     if(action.type==="SET_NAME"){
         return{
             ...state,

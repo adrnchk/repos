@@ -9,16 +9,15 @@ function Page() {
   console.log(id);
 
   let item = useSelector(({ articles }: any) =>
-    articles.items[0]?.find((article: any) => article.title === id)
+    articles.items[0]?.find((article: any) => article.id.toString() === id)
   );
   console.log(item);
-  const [more, setmore] = React.useState(false);
   return (
     <div className="mainPage">
       {user ? (
         <div>
           <div className="shadow">
-            <img src={item?.img}></img>
+            <img src={item?.img} alt="img"></img>
           </div>
 
           <div className="upper">
