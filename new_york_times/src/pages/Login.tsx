@@ -36,13 +36,15 @@ function Login(props: ILoginProps) {
               required
               value={props.email}
               onChange={(e) => {
+                e.target.className =
+                  e.target.value.trim() != "" ? "input100 has-val" : "input100";
                 props.setEmail(e.target.value);
               }}
             />
             <span className="focus-input100" data-placeholder="Email"></span>
           </div>
           <p className="errorMsg">{props.emailError}</p>
-
+          <br />
           <div
             className="wrap-input100 validate-input"
             data-validate="Enter password"
@@ -55,6 +57,8 @@ function Login(props: ILoginProps) {
               required
               value={props.password}
               onChange={(e) => {
+                e.target.className =
+                  e.target.value.trim() != "" ? "input100 has-val" : "input100";
                 props.setPassword(e.target.value);
               }}
             />

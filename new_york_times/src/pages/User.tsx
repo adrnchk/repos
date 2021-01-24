@@ -20,12 +20,14 @@ interface IUser {
 }
 function User() {
   const [edit, setedit] = React.useState(false);
+  const [file, setfile]: any = React.useState(null);
+  const [fileUrl, setfileUrl]: any = React.useState("");
   let user = firebase.auth().currentUser;
   const dispatch = useDispatch();
   let storageRef = firebase
     .storage()
     .ref("Users/" + user?.email + "/avatar.jpg");
-  let file: any = null;
+
   let name: string = "";
   let url: string = "";
   const stor = useSelector(({ userInfo }: IUser) => {
@@ -35,7 +37,13 @@ function User() {
   });
   const _handleImageChange = (e: any) => {
     e.preventDefault();
-    file = e.target.files[0];
+    setfile(e.target.files[0]);
+
+    const reader = new FileReader();
+    reader.onloadend = (event) => {
+      setfileUrl(reader.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
   };
   const _handleNameChange = (e: any) => {
     e.preventDefault();
@@ -105,8 +113,11 @@ function User() {
                           <img
                             alt="img"
                             width="100"
+                            id="prev"
                             src={
-                              stor.userInfo.avatar
+                              file
+                                ? fileUrl
+                                : stor.userInfo.avatar
                                 ? stor.userInfo.avatar
                                 : userPhoto
                             }
@@ -126,14 +137,12 @@ function User() {
                 )}
 
                 <br />
+                <br />
                 <label className="nameLabel">
                   {stor.userInfo.name ? stor.userInfo.name : "Your name"}
                   {`   `}
                 </label>
                 {/* <label>Email: {stor.userInfo.email}</label> */}
-                <br />
-                <br />
-                <br />
                 {edit && (
                   <div>
                     <input
@@ -143,6 +152,9 @@ function User() {
                       type="text"
                     ></input>
 
+                    <br />
+                    <br />
+                    <br />
                     <button onClick={updateUser} className="gradient-button">
                       Save changes
                     </button>
